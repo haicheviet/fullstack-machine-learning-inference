@@ -1,0 +1,20 @@
+version: "3"
+services:
+  app:
+    image: '${DOCKER_IMAGE_APP?Variable not set}:${TAG}'
+    env_file:
+      - .env
+    ports:
+      - 2000:2000
+    links:
+      - redis
+    volumes:
+      - "$PWD/logs:/app/logs"
+      - "$PWD/app:/app/app"
+    build: .
+
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379
+    
