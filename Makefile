@@ -1,15 +1,17 @@
 build-infra:
 	. ./.env
-	./deploy.sh
+	./scripts/deploy.sh
 
 build-local:
 	echo "Note: set environment REDIS_HOST to redis"
 	. ./.env
-	docker-compose up -d
-	echo "Service is on http://localhost:2000/ "
+	export DOCKER_IMAGE_APP=app
+	bash scripts/build.sh
+	docker compose up -d --force-recreate
+	echo "Service is on http://localhost:2000/"
 
 delete-infra:
-	echo "Warning: Will delete all infra in about 3s"
+	echo "Warning: Will delete all infra in 3s"
 	sleep 3
 	. ./.env
-	./deploy.sh delete
+	./scripts/deploy.sh delete

@@ -1,7 +1,7 @@
 version: "3"
 services:
   app:
-    image: '${DOCKER_IMAGE_APP?Variable not set}:${TAG}'
+    image: "${DOCKER_IMAGE_APP?Variable-not-set}:${TAG:-latest}"
     env_file:
       - .env
     ports:
@@ -9,9 +9,8 @@ services:
     links:
       - redis
     volumes:
-      - "$PWD/logs:/app/logs"
-      - "$PWD/app:/app/app"
-    build: .
+      - "./logs:/app/logs"
+      - "./app:/app/app"
 
   redis:
     image: redis:latest

@@ -1,3 +1,6 @@
+import os
+import time
+
 import torch
 from scipy.special import softmax
 import numpy as np
@@ -14,16 +17,17 @@ origin_model = AutoModelForSequenceClassification.from_pretrained("cardiffnlp/tw
 
 text = "Good night 😊"
 encoded_input = tokenizer(text, return_tensors='pt')
-
+folder_save = "twitter-roberta-base-sentiment"
+if not os.path.exists(folder_save):
+    os.mkdir(folder_save)
 
 traced_cpu = torch.jit.trace(origin_model, (encoded_input["input_ids"], encoded_input["attention_mask"]))
 
-torch.jit.save(traced_cpu, "trace_model.pt")
+torch.jit.save(traced_cpu, os.path.join(folder_save, "trace_model.pt"))
+tokenizer.save_pretrained(folder_save)
 
-
-
-model = torch.jit.load("trace_model.pt")
-
+# Load model to verify
+model = torch.jit.load(os.path.join(folder_save, "trace_model.pt"))
 
 output = model(**encoded_input)
 scores = output[0][0].detach().numpy()

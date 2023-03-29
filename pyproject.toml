@@ -17,7 +17,6 @@ gevent = "*"
 cryptography = "*"
 uvloop = "*"
 httptools = "*"
-boto3 = "*"
 tweepy = "*"
 scipy = "*"
 
