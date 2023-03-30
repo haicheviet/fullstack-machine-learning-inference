@@ -1,5 +1,4 @@
 import os
-import time
 
 import torch
 from scipy.special import softmax

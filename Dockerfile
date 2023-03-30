@@ -33,17 +33,17 @@ ARG AWS_SECRET_ACCESS_KEY
 
 ENV AWS_SECRET_ACCESS_KEY "$AWS_SECRET_ACCESS_KEY"
 
-COPY download_model.py ./download_model.py
+ONBUILD COPY download_model.py ./download_model.py
 
-RUN pip install boto3 tqdm
+ONBUILD RUN pip install boto3 tqdm
 
-RUN python download_model.py
+ONBUILD RUN python download_model.py
 
 
 # Copy local model image
 FROM base_img AS model-image-copy
 
-Add data ./data
+ONBUILD Add data ./data
 
 
 # Define general layer download cause the current docker is not support --from=$var
@@ -86,8 +86,6 @@ FROM base_img AS runtime-image
 
 COPY --from=compile-image /opt/venv /opt/venv
 ENV PATH="/opt/venv/bin:$PATH"
-RUN 
-RUN echo $MODEL_BUILD
 
 COPY --from=model-image-general /app /app
 

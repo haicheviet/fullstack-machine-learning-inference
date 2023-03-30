@@ -9,12 +9,20 @@ vim .env
 
 ## Local setup
 
+Download model transfomer to local data
+```bash
+pip install transformers
+python generate_torch_script.py
+cp -r twitter-roberta-base-sentiment/* data/*
+rm -rf twitter-roberta-base-sentiment # Remove nonuse model for faster build time
+```
+
 Set redis_host enviroment to `redis`
 
 Once you have the .env setup, run the following script to init docker-compose service:
 
 ```bash
-make build-local
+make build-local # Using sudo if your docker require sudo access
 ```
 
 When done, you should have listed:

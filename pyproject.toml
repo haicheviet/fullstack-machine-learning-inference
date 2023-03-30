@@ -22,7 +22,7 @@ scipy = "*"
 
 
 [tool.poetry.dev-dependencies]
-mypy = "^0.770"
+mypy = "0.981"
 black = "^21.10b0"
 isort = "^5.9.3"
 autoflake = "^1.4"
@@ -32,6 +32,7 @@ types-redis = "3.5.11"
 
 [tool.mypy]
 ignore_missing_imports = true
+implicit_reexport = true
 
 [tool.isort]
 profile = "black"
