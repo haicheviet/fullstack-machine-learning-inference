@@ -1,4 +1,11 @@
 # Introduction
+For the hands-on AI project, we will use Twitter sentiment analyst to demonstrate full-stack machine learning inference.
+
+The idea of the project is to get metadata from Twitter URL and sentiment analyst content. After that, we will aggregate sentiment text from the individual user to analyze more sentiment for each user.
+
+
+![ML Design](https://haicheviet.com/machine-learning-inference-on-industry-standard/ml-inference_huf62dc9e0d697df28df409b2b033d43b3_158144_2000x0_resize_q100_h2_box.webp)
+
 
 First, make sure you copy the following file and edit its contents:
 
